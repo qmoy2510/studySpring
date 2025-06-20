@@ -15,6 +15,6 @@ public class FirstController {
     @GetMapping("/bye")
     public String bye(Model model) {
            model.addAttribute("name", name);
-        return "by ebye";
+        return "byebye";
     }
 }
