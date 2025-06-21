@@ -5,8 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class FirstController {
-    String name = "박현빈";
+public class FirstController { String name = "박현빈";
    @GetMapping("/")
    public String hello(Model model) {
            model.addAttribute("name", name);
