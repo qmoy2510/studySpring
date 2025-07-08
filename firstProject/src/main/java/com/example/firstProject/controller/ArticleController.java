@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -57,6 +58,18 @@ public class ArticleController {
         //3. 뷰 페이지 반환하기
         return "articles/edit";
     }
+    @GetMapping("/articles/{id}/delete")
+    public String delete(@PathVariable Long id , RedirectAttributes rttr) {
+        log.info("id = " +id);
+        //1. id를 조회해 데이터 가져오기
+        Article target = articleRepository.findById(id).orElse(null);
+        log.info(target.toString());
+        if(target != null){
+            articleRepository.delete(target);
+            rttr.addFlashAttribute("msg","삭제됐습니다!");
+        }
+        return "redirect:/articles";
+    }
 
     @PostMapping("/articles/create")
     public String createArticle (ArticleForm form) {
@@ -76,7 +89,6 @@ public class ArticleController {
         //1. DTO 를 엔티티로 변환
         Article articleEntity = form.toEntity();
         log.info(articleEntity.toString());
-
        //2. 엔티티를 db에 저장
         //2-1. DB에서 기존 데이터 가져오기
         Article target = articleRepository.findById(articleEntity.getId()).orElse(null);
