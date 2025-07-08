@@ -70,4 +70,22 @@ public class ArticleController {
         log.info(saved.toString());
         return "redirect:/articles/"+saved.getId();
     }
+    @PostMapping("/articles/update")
+    public String updateArticle (ArticleForm form) {
+        log.info(form.toString());
+        //1. DTO 를 엔티티로 변환
+        Article articleEntity = form.toEntity();
+        log.info(articleEntity.toString());
+
+       //2. 엔티티를 db에 저장
+        //2-1. DB에서 기존 데이터 가져오기
+        Article target = articleRepository.findById(articleEntity.getId()).orElse(null);
+
+        //2-2. 기존 데이터값을 갱신하기
+        if (target != null) {
+            articleRepository.save(articleEntity);
+        }
+
+        return "redirect:/articles/"+articleEntity.getId();
+    }
 }
