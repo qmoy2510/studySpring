@@ -21,12 +21,12 @@ public class ArticleController {
     @Autowired
     private ArticleRepository articleRepository;
 
-    @GetMapping("/article/new")
+    @GetMapping("/articles/new")
     public String newArticleFomr () {
         return "articles/new";
     }
 
-    @GetMapping("/article/{id}")
+    @GetMapping("/articles/{id}")
     public String show(@PathVariable Long id , Model model) {
         log.info("id = " +id);
         //1. id를 조회해 데이터 가져오기
@@ -47,7 +47,7 @@ public class ArticleController {
         return "articles/index";
     }
 
-    @PostMapping("/article/create")
+    @PostMapping("/articles/create")
     public String createArticle (ArticleForm form) {
         log.info(form.toString());
         //1. DTO 를 엔티티로 변환
@@ -57,6 +57,6 @@ public class ArticleController {
         //2. 레포지터리로 엔티티를 db에 저장
         Article saved = articleRepository.save(article);
         log.info(saved.toString());
-        return "";
+        return "redirect:/articles/"+saved.getId();
     }
 }
