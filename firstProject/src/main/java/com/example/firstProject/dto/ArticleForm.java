@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 public class ArticleForm {
-    private long id;
+    private Long id;
     private String title;
     private String content;
 
