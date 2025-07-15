@@ -4,7 +4,6 @@ import com.example.firstProject.dto.ArticleForm;
 import com.example.firstProject.entity.Article;
 import com.example.firstProject.repository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.asm.IModelFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
